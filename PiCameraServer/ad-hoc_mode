@@ -1,1 +1,18 @@
 #!/bin/bash
+# /Created By: Charles Engen
+# 10/7/2016
+# Script reverts settings back to original from ad-hoc mode
+
+echo "Starting Ad-hoc mode"
+
+sudo ifdown wlan0
+
+if [! -f /etc/network/interface-adhoc]; then
+    sudo cp /etc/network/interface-adhoc /etc/network/interface
+fi
+
+if [! -f /etc/network/ifplugd-adhoc]; then
+    sudo cp /etc/default/ifplugd-adhoc /etc/default/ifplugd
+fi
+
+sudo ifup wlan0
