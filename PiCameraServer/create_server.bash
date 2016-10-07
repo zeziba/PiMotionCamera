@@ -36,3 +36,5 @@ echo "Starting up new interface"
 echo 'sudo ifdown wlan0'
 echo 'sudo cp /etc/network/interfaces-adhoc /etc/network/interfaces'
 echo 'sudo ifup wlan0'
+
+echo "Finished Installing Setting up and Installing Server"
