@@ -18,7 +18,7 @@ GPIO.setup(OUTPIN, GPIO.OUT)
 
 
 def check_movement()->bool:
-    t = GPIO.output(INPIN)
-    GPIO.input(OUTPIN, t)
+    t = bool(GPIO.input(INPIN))
+    GPIO.output(OUTPIN, t)
     return t
 
