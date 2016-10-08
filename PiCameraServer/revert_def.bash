@@ -12,3 +12,7 @@ sudo cp /etc/default/ifplugd_backup /etc/default/ifplugd
 sudo cp /etc/network/interfaces_backup /etc/network/interfaces
 
 sudo ifup wlan0
+
+sudo service isc-dhcp-server stop
+
+read  -n 1 -p "Input Selection:" mainmenuinput
