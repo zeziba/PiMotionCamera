@@ -6,19 +6,15 @@ Created By: Charles Engen
 import functools
 from RPi import GPIO
 # Comment out following line when moved to RPi
-GPIO.VERBOSE = False
+# GPIO.VERBOSE = False
 
-INPIN = 11 # Signal in
-OUTPIN = 3 # LED
+INPIN = 16 # Signal in
+# OUTPIN = 3 # LED
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(INPIN, GPIO.IN)
-GPIO.setup(OUTPIN, GPIO.OUT)
+# GPIO.setup(OUTPIN, GPIO.OUT)
 
-
-def check_movement()->bool:
-    t = bool(GPIO.input(INPIN))
-    GPIO.output(OUTPIN, t)
-    return t
+GPIO.add_event_detect(INPIN, GPIO.RISING)
 
