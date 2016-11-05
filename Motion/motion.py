@@ -12,7 +12,7 @@ config = config_parser.ConfigSelectionMap(config_parser.configFile)
 # Comment out following line when moved to RPi
 # GPIO.VERBOSE = False
 
-INPIN = eval(config["Settings"]["PIR"])  # Signal in
+INPIN = eval(config["Settings"]["pir"])  # Signal in
 OUTPIN = eval(config["Settings"]["led_pin"])  # LED
 
 GPIO.setwarnings(eval(config["Settings"]["warnings"]))
