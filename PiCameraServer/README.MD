@@ -8,7 +8,7 @@
     p {
         color: black;
     }
-</stlye>
+</style>
 
 <div>
     <body>
