@@ -5,13 +5,17 @@ Created By: Charles Engen
 
 import functools
 from RPi import GPIO
+import config_parser
+
+config = config_parser.ConfigSelectionMap(config_parser.configFile)
+
 # Comment out following line when moved to RPi
 # GPIO.VERBOSE = False
 
-INPIN = 16 # Signal in
-# OUTPIN = 3 # LED
+INPIN = eval(config["Settings"]["PIR"])  # Signal in
+OUTPIN = eval(config["Settings"]["led_pin"])  # LED
 
-GPIO.setwarnings(False)
+GPIO.setwarnings(eval(config["Settings"]["warnings"]))
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(INPIN, GPIO.IN)
 # GPIO.setup(OUTPIN, GPIO.OUT)

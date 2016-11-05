@@ -39,6 +39,8 @@ defaultConfig = {"Settings": {
         "sensor_mode": 0,
         "led_pin": 3,
         "quality": 100,
+        "PIR": 16,
+        "warnings": False,
         "save_location": join("/", "mnt", "smbServer")
     }
 }
