@@ -1,0 +1,94 @@
+"""
+Created By: Charles Engen
+11/4/2016
+Last Modification:
+11/4/2016
+
+This module creates a config.ini file to use for the PiCamera, it sets many default params. If any are changed ensure
+the program is restarted to see the effects. Also ensure that if a value is changed in this program you understand
+what it will do. If the config.ini file is corrupted or modified and no longer works, delete the file and run this
+program again.
+"""
+
+import os
+from os.path import join
+import configparser
+
+configFile = "config.ini"
+defaultConfig = {"Settings": {
+        "resolution": [3280, 2464],
+        "format": ".PNG",
+        "interval": 1,
+        "sharpness": 0,
+        "contrast": 0,
+        "saturation": 0,
+        "brightness": 50,
+        "iso": 3200,
+        "video_stabilization": False,
+        "exposure_compensation": 0,
+        "exposure_mode": "auto",
+        "meter_mode": "average",
+        "awb_mode": "auto",
+        "image_effect": "none",
+        "color_effects": None,
+        "rotation": 0,
+        "hflip": True,
+        "vflip": False,
+        "zoom": (0.0, 0.0, 1.0, 1.0),
+        "framerate": 15,
+        "sensor_mode": 0,
+        "led_pin": 3,
+        "quality": 100,
+        "save_location": join("/", "mnt", "smbServer")
+    }
+}
+
+try:
+    with open(join(os.getcwd(), "%s" % configFile), "r") as f:
+        pass
+except Exception as error:
+    with open(join(os.getcwd(), "%s" % configFile), "w+") as f:
+        tempConf = configparser.ConfigParser()
+        for header in defaultConfig.keys():
+            tempConf.add_section("%s" % header)
+            for option in defaultConfig[header].keys():
+                tempConf.set(header, option, str(defaultConfig[header][option]))
+        tempConf.write(f)
+finally:
+    config = configparser.ConfigParser()
+    config.read(configFile)
+
+
+def ConfigSelectionMap(file, section=None):
+    dict1 = {}
+    if section is not None:
+        options = file.options(section)
+        for option in options:
+            try:
+                dict1[option] = file.get(section, option)
+                if dict1[option] == -1:
+                    print("skip: %s" % option)
+            except Exception as r:
+                print("Exception on %s\n%s" % (option, r))
+    else:
+        for section_ in config:
+            if section_ != "DEFAULT":
+                dict1[section_] = dict()
+                for option in config.options(section_):
+                    dict1[section_][option] = config[section_][option]
+    return dict1
+
+
+def config_camera(camera, cnf: dict()):
+    for option_ in cnf["Settings"].keys():
+        if option_ in camera.__dict__.keys():
+            try:
+                eval("camera.%s = %s" % (option_, eval(cnf["Settings"][option_])))
+            except Exception as err:
+                try:
+                    eval("camera.%s = %s" % (option_, cnf["Settings"][option_]))
+                except Exception as er:
+                    pass
+
+if __name__ == "__main__":
+    print(ConfigSelectionMap(config))
