@@ -23,7 +23,7 @@ defaultConfig = {"Settings": {
         "contrast": 0,
         "saturation": 0,
         "brightness": 50,
-        "iso": 3200,
+        "iso": 800,
         "video_stabilization": False,
         "exposure_compensation": 0,
         "exposure_mode": "auto",
@@ -34,7 +34,7 @@ defaultConfig = {"Settings": {
         "rotation": 0,
         "hflip": True,
         "vflip": False,
-        "zoom": (0.0, 0.0, 1.0, 1.0),
+        "crop": (0.0, 0.0, 1.0, 1.0),
         "framerate": 15,
         "sensor_mode": 0,
         "led_pin": 3,
@@ -82,15 +82,23 @@ def ConfigSelectionMap(file, section=None):
 
 
 def config_camera(camera, cnf: dict()):
-    for option_ in cnf["Settings"].keys():
-        if option_ in camera.__dict__.keys():
-            try:
-                eval("camera.%s = %s" % (option_, eval(cnf["Settings"][option_])))
-            except Exception as err:
-                try:
-                    eval("camera.%s = %s" % (option_, cnf["Settings"][option_]))
-                except Exception as er:
-                    pass
+    camera.sharpness = eval(cnf["Settings"]["sharpness"])
+    camera.contrast = eval(cnf["Settings"]["contrast"])
+    camera.brightness = eval(cnf["Settings"]["brightness"])
+    camera.saturation = eval(cnf["Settings"]["saturation"])
+    camera.ISO = eval(cnf["Settings"]["iso"])
+    camera.video_stabilization = eval(cnf["Settings"]["video_stabilization"])
+    camera.exposure_compensation = eval(cnf["Settings"]["exposure_compensation"])
+    camera.exposure_mode = cnf["Settings"]["exposure_mode"]
+    camera.meter_mode = cnf["Settings"]["meter_mode"]
+    camera.awb_mode = cnf["Settings"]["awb_mode"]
+    camera.image_effect = cnf["Settings"]["image_effect"]
+    camera.color_effects = eval(cnf["Settings"]["color_effects"])
+    camera.rotation = eval(cnf["Settings"]["rotation"])
+    camera.hflip = eval(cnf["Settings"]["hflip"])
+    camera.vflip = eval(cnf["Settings"]["vflip"])
+    camera.crop = eval(cnf["Settings"]["crop"])
+
 
 if __name__ == "__main__":
     print(ConfigSelectionMap(config))

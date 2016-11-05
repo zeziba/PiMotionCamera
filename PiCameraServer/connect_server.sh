@@ -11,13 +11,17 @@ if [ -d "/mnt/smbServer" ] ; then
     echo "$1 Exists: Starting connection"
 else
     echo "$1 does not Exist: Creating directory, setting permissions"
-    echo sudo mkdir ${default_mnt}
-    echo sudo chmod 1777 ${default_mnt}
+    sudo mkdir ${default_mnt}
+    sudo chmod 1777 ${default_mnt}
 fi
 
-echo dir_loc=$(nmblookup "*" | grep -Pom 1 '[0-9.]{7,15}')
+dir_loc=$(nmblookup 'RPINAS' | grep -Pom 1 '[0-9.]{7,15}')
 
-echo mount -t cifs -o username=root,password=pi //${dir_loc}/data ${default_mnt} || echo "Failed to connect"
+sudo mount -t cifs -o username=root,password=pi //${dir_loc}/data ${default_mnt} || echo "Failed to connect"
+
+echo "Finished mounting server to ${default_mnt} from server located at ${dir_loc}"
+
+read
 
 
 

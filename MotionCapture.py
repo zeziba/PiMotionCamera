@@ -21,17 +21,19 @@ config = configGet.ConfigSelectionMap(configGet.configFile)
 # The config_parser.py must be run at least once to generate the file, will be done automatically
 # when this file is run.
 camera = Cam(resolution=eval(config["Settings"]["resolution"]), framerate=eval(config["Settings"]["framerate"]),
-             led_pin=eval(config["Settings"]["led"]), sensor_mode=eval(config["Settings"]["sensor_mode"]))
+             led_pin=eval(config["Settings"]["led_pin"]), sensor_mode=eval(config["Settings"]["sensor_mode"]))
 
 configGet.config_camera(camera, config)
+sleep_time = eval(config["Settings"]["interval"])
 
 
 if __name__ == "__main__":
     try:
         while True:
             if motion.GPIO.event_detected(motion.INPIN):
+                print("Motion Captured")
                 capture.capture_image(capture.file_location_generator(capture.generate_name()), camera)
-                time.sleep(eval(config["Settings"]["interval"]))
+                time.sleep(sleep_time)
     except KeyboardInterrupt:
         camera.close()
 
