@@ -1,15 +1,3 @@
-<style>
-    body {
-        background: white;
-    }
-    h3 {
-        color: black;
-    }
-    p {
-        color: black;
-    }
-</style>
-
 <div>
     <body>
         <h3>Server Files</h3>
