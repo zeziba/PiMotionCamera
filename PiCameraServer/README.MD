@@ -10,8 +10,10 @@
             <ul>
                 <li>sudo ./connect_server.sh <b>Location of folder to mount server</b></li>
             </ul>
+            <ul>sudo ./disconnect_server.sh <b>Disconnects pi from server</b>
+            </ul>
         </div>
-        <p>After command is run and is successful run, it
+        <p>After command is run and is successful, it
         is then safe to use the PiCamera package.
         </p>
     </body>
