@@ -76,8 +76,6 @@ Save Location:
 	DO NOT CHANGE
 Crop:
 	DO NOT CHANGE
-Image Effects:
-	DO NOT CHANGE
 Awb Mode:
 	DO NOT CHANGE
 Meter Mode:
