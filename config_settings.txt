@@ -38,7 +38,7 @@ Sharpness:
 	Values: -100 - 100
 Contrast:
 	Increasing makes the darks differ from the lights more obvious
-	Decreasing makes the difference between darks and lights less noticable
+	Decreasing makes the difference between darks and lights less noticeable
 	Values: -100 - 100
 Saturation:
 	Increasing makes the colors brighter
@@ -62,7 +62,7 @@ Hflip:
 	Values: true	-or-	false
 Vflip:
 	Flips the photo on the y-axis
-	values: true	-or-	false
+	Values: true	-or-	false
 Quality:
 	Specifies the amount of compression to occur
 	Values: 0 - 100
