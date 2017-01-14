@@ -3,13 +3,15 @@ Created By: Charles Engen
 10/6/2016
 """
 
-import picamera
-import os
-import time
-import string
-import random
-import config_parser
 import getpass
+import os
+import random
+import string
+import time
+
+import picamera
+
+from src import config_parser
 
 config = config_parser.ConfigSelectionMap(config_parser.configFile)
 

@@ -3,9 +3,9 @@ Created By: Charles Engen
 10/6/2016
 """
 
-import functools
 from RPi import GPIO
-import config_parser
+
+from src import config_parser
 
 config = config_parser.ConfigSelectionMap(config_parser.configFile)
 

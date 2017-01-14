@@ -8,12 +8,13 @@ Users can find more information on the PiCamera module at
     http://picamera.readthedocs.io/en/release-1.12/api_camera.html
 """
 
-import Capture.capture as capture
-import Motion.motion as motion
 import time
-from picamera import PiCamera as Cam
-import config_parser as configGet
 
+import src.Capture.capture as capture
+import src.config_parser as configGet
+from picamera import PiCamera as Cam
+
+from src import Motion as motion
 
 config = configGet.ConfigSelectionMap(configGet.configFile)
 
