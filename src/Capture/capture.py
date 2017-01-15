@@ -16,15 +16,6 @@ from src import config_parser
 config = config_parser.ConfigSelectionMap(config_parser.configFile)
 
 
-def capture_image(location, camera: picamera.PiCamera, type_=None)->bool:
-    try:
-        camera.capture(location, format=type_ if type_ is not None else location.split(".")[-1].lower())
-        return True
-    except picamera.PiCameraError as e:
-        print("PiCamera Error: %s" % e)
-        return False
-
-
 def generate_name(string_size=4, override=(string.ascii_uppercase + string.digits),
                   ftype=config["Settings"]["format"])->str:
     a = time.strftime("%d_%m_%Y_")
@@ -38,3 +29,12 @@ def file_location_generator(file_name=generate_name(), override=config["Settings
     override = os.path.join(override, "images", getpass.getuser())
     os.makedirs(override, exist_ok=True)
     return os.path.join(override, file_name)
+
+
+def capture_image(camera: picamera.PiCamera, location=file_location_generator(), type_=None)->bool:
+    try:
+        camera.capture(location, format=type_ if type_ is not None else location.split(".")[-1].lower())
+        return True
+    except picamera.PiCameraError as e:
+        print("PiCamera Error: %s" % e)
+        return False

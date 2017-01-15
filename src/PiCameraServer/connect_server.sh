@@ -21,7 +21,5 @@ sudo mount -t cifs -o username=root,password=pi //${dir_loc}/data ${default_mnt}
 
 echo "Finished mounting server to ${default_mnt} from server located at ${dir_loc}"
 
-read
-
 
 

@@ -5,7 +5,7 @@ Created By: Charles Engen
 
 from RPi import GPIO
 
-from src import config_parser
+import config_parser
 
 config = config_parser.ConfigSelectionMap(config_parser.configFile)
 

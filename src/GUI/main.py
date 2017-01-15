@@ -3,6 +3,7 @@ from tkinter import N, S, E, W
 from os import getcwd
 
 from GUI.img_loader.loader import Loader
+from PiCameraServer.main import ConnectionManager
 
 
 class MainFrame(tkinter.Tk):
@@ -18,6 +19,8 @@ class MainFrame(tkinter.Tk):
 
         #  loads first image found
         self._display.change_picture(self.pictures)
+
+        self.connection_manager = self.__load_server()
 
     def _sub_buttons(self, start_column=0, start_row=0) -> object:
         def _next(master, move=0):
@@ -40,6 +43,11 @@ class MainFrame(tkinter.Tk):
         filemenu.add_command(label="Exit", command=master.quit)
         menubar.add_cascade(label="File", menu=filemenu)
         tkinter.Tk.config(master, menu=menubar)
+
+    @staticmethod
+    def __load_server():
+        manager = ConnectionManager()
+        return manager
 
     def button(self, master=None, label=None, command=None, anchor=None,
                bg=None, **kwargs):
