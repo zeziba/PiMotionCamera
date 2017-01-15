@@ -1,0 +1,13 @@
+TODO:
+    Get GUI to load images taken by camera
+    Get program to move images to server is available
+
+    Check if multiprocess camera functions properly
+    Check if camera still takes photos when motion is detected
+        -- Allow user to force picture
+
+    Add status checking for server connection
+        -- See if server connection is blocked/locked/dropped
+
+    Optimize the program so that it capable of running on an overheating raspberry pi 2
+
