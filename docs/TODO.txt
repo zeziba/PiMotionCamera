@@ -14,5 +14,5 @@ TODO:
 
 
     1/15/2017
-    Need to test MotionCapture.py on system
+    Need to test MotionCapture.py, PiCameraServer/main.py on system
 

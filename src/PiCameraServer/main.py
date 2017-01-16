@@ -9,6 +9,8 @@ Purpose:
     Disconnect from server when finished storing images
 """
 
+# NEED TO TEST!!!
+
 
 class ConnectionManager:
 
