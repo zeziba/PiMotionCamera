@@ -18,7 +18,7 @@ configFile = "config.ini"
 defaultConfig = {"Settings": {
         "resolution": [3280, 2464],
         "format": ".PNG",
-        "interval": 1,
+        "interval": 1.000,
         "sharpness": 0,
         "contrast": 0,
         "saturation": 0,

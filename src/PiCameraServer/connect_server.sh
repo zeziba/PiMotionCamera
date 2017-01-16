@@ -3,6 +3,8 @@
 # 11/4/2016
 # Connects the Pi to the PINAS server to store images
 
+# No longer used, keeping for reference
+
 declare dir_loc
 declare default_mnt="/mnt/smbServer"
 

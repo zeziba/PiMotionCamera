@@ -22,13 +22,19 @@ class MainFrame(tkinter.Tk):
 
         self.connection_manager = self.__load_server()
 
+    def run(self):
+        super().mainloop()
+
+    def quit(self):
+        super().quit()
+
     def _sub_buttons(self, start_column=0, start_row=0) -> object:
         def _next(master, move=0):
             master.pictures.change_index(move)
             master._display.change_picture(master.pictures)
-        button_left = self.button(self, label="Prev", command=lambda: _next(self, -1))
-        button_center = self.button(self, label="Quit", command=self.quit)
-        button_right = self.button(self, label="Next", command=lambda: _next(self, 1))
+        button_left = self._button(self, label="Prev", command=lambda: _next(self, -1))
+        button_center = self._button(self, label="Quit", command=self.quit)
+        button_right = self._button(self, label="Next", command=lambda: _next(self, 1))
         button_left.grid(row=5+start_row, column=0+start_column)
         button_center.grid(row=5+start_row, column=1+start_column)
         button_right.grid(row=5+start_row, column=2+start_column)
@@ -36,7 +42,7 @@ class MainFrame(tkinter.Tk):
     def _set_canvas_image(self, image: object)->None:
         self.canvas_image = image
 
-    def _menu_bar(self, master=None, *args, **kwargs) -> object:
+    def _menu_bar(self, master=None, *args, **kwargs)->object:
         menubar = tkinter.Menu(master=self)
         filemenu = tkinter.Menu(master=menubar, tearoff=0)
         filemenu.add_separator()
@@ -45,18 +51,19 @@ class MainFrame(tkinter.Tk):
         tkinter.Tk.config(master, menu=menubar)
 
     @staticmethod
-    def __load_server():
+    def __load_server()->object:
         manager = ConnectionManager()
         return manager
 
-    def button(self, master=None, label=None, command=None, anchor=None,
-               bg=None, **kwargs):
+    @staticmethod
+    def _button(master=None, label=None, command=None, anchor=None,
+                bg=None, **kwargs)->object:
 
-        def __default_callback():
+        def __default_callback()->object:
             return None
 
         button = tkinter.Button(
-            master=master if master is not None else self,
+            master=master,
             text=label if label is not None else "test",
             command=command if command is not None else __default_callback,
             anchor=anchor if anchor is not None else "w",
@@ -67,7 +74,7 @@ class MainFrame(tkinter.Tk):
 
     class _Display:
         def __init__(self, master: object=None, row: int = 0, column: int = 0, sticky: object = (N + W),
-                     size: tuple = (400, 450), bg="grey"):
+                     size: tuple = (400, 450), bg="grey")->None:
             self.size = size
             self.window = tkinter.Frame(master, height=size[0], width=size[1])
             self.picture = tkinter.Canvas(self.window, height=size[0] - 5, width=size[1] - 5)
@@ -77,11 +84,11 @@ class MainFrame(tkinter.Tk):
             self.window.grid(row=row, column=column, sticky=sticky, columnspan=4, rowspan=4)
             self.picture.configure(bg=bg)
 
-        def change_picture(self, image):
+        def change_picture(self, image)->None:
             self.picture.image = image(self.size)
             self.picture.create_image(0, 0, image=self.picture.image, anchor="nw")
 
 
 if __name__ == "__main__":
     main = MainFrame()
-    main.mainloop()
+    main.run()
